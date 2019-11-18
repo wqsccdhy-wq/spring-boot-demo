@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf语法</title>
+</head>
+<body>
+    <h1>
+        <div th:text="${msg}"></div>
+    </h1>
+
+    <div>
+        <table style="border-collapse:collapse;" border="1">
+            <th style="width: 100px;">ID</th>
+            <th style="width: 100px;">名称</th>
+            <th style="width: 100px;">年龄</th>
+            <tr s>
+                <td th:text="${student.id}" style="text-align: center;">1</td>
+                <td th:text="${student.name}" style="text-align: center;">1</td>
+                <td th:text="${student.age}" style="text-align: center;">1</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>
