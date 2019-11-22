@@ -16,6 +16,9 @@ import com.wq.springboot.po.Student;
 @Controller
 public class HelloController {
 
+    /**
+     * 日志
+     */
     private final static Logger logger = LoggerFactory.getLogger(HelloController.class);
 
     @ResponseBody
