@@ -10,6 +10,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.annotation.Resource;
+
 /**
  * @author wq-z170
  * @since 2019/12/14 16:51
@@ -17,6 +19,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class MyConfig implements WebMvcConfigurer {
+
+    @Resource
+    private LoginHandlerInterceptor loginHandlerInterceptor;
+
+    @Resource
+    private NativeLocaleResolver nativeLocaleResolver;
 
     /**
      * 视图映射
@@ -42,7 +50,7 @@ public class MyConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        InterceptorRegistration interceptorRegistration = registry.addInterceptor(new LoginHandlerInterceptor());
+        InterceptorRegistration interceptorRegistration = registry.addInterceptor(loginHandlerInterceptor);
         interceptorRegistration.addPathPatterns("/**");
         interceptorRegistration.excludePathPatterns("/", "/index.html", "/login.html", "/user/login");
         // 不拦截静态资源
@@ -56,7 +64,8 @@ public class MyConfig implements WebMvcConfigurer {
      */
     @Bean
     public LocaleResolver localeResolver() {
-        return new NativeLocaleResolver();
+
+        return nativeLocaleResolver;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.wq.springboot.configuration;
 
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
 
@@ -12,6 +13,7 @@ import java.util.Locale;
  * @since 2019/12/15 16:39
  * @Desc 根据请求头，获取国际化
  */
+@Component
 public class NativeLocaleResolver implements LocaleResolver {
 
     @Override

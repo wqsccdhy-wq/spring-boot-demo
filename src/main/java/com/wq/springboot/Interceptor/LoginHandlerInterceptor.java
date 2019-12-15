@@ -1,5 +1,6 @@
 package com.wq.springboot.Interceptor;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
  * @Desc 登录拦截器
  * @since 2019/12/15 18:23
  */
+@Component
 public class LoginHandlerInterceptor implements HandlerInterceptor {
 
     @Override
