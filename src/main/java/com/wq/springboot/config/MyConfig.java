@@ -1,12 +1,14 @@
 package com.wq.springboot.config;
 
+import com.wq.springboot.Interceptor.LoginHandlerInterceptor;
+import com.wq.springboot.configuration.NativeLocaleResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import com.wq.springboot.configuration.NativeLocaleResolver;
 
 /**
  * @author wq-z170
@@ -18,6 +20,7 @@ public class MyConfig implements WebMvcConfigurer {
 
     /**
      * 视图映射
+     * 
      * @param registry
      */
     @Override
@@ -28,16 +31,32 @@ public class MyConfig implements WebMvcConfigurer {
          */
         registry.addViewController("/").setViewName("login");
         registry.addViewController("/index.html").setViewName("login");
+
+        registry.addViewController("/main.html").setViewName("dashboard");
     }
 
     /**
-     *
+     * 拦截器
+     * 
+     * @param registry
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        InterceptorRegistration interceptorRegistration = registry.addInterceptor(new LoginHandlerInterceptor());
+        interceptorRegistration.addPathPatterns("/**");
+        interceptorRegistration.excludePathPatterns("/", "/index.html", "/login.html", "/user/login");
+        // 不拦截静态资源
+        interceptorRegistration.excludePathPatterns("/asserts/**", "/webjars/**", "/static/**");
+
+    }
+
+    /**
+     * @Desc 国际化
      * @return LocaleResolver
      */
     @Bean
-    public LocaleResolver localeResolver(){
+    public LocaleResolver localeResolver() {
         return new NativeLocaleResolver();
     }
-
 
 }
