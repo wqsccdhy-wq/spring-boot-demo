@@ -22,9 +22,8 @@ public class EmployeeController {
     @Autowired
     private EmployeeDao employeeDao;
 
-
     @GetMapping("/emps")
-    public String list(Model model){
+    public String list(Model model) {
         Collection<Employee> all = employeeDao.getAll();
         System.out.println(all.size());
         return "emp/list";
