@@ -25,7 +25,7 @@ public class EmployeeController {
     @GetMapping("/emps")
     public String list(Model model) {
         Collection<Employee> all = employeeDao.getAll();
-        System.out.println(all.size());
+        model.addAttribute("emps", all);
         return "emp/list";
     }
 }
