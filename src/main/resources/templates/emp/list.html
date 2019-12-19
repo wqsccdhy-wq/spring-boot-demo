@@ -14,6 +14,7 @@
 
 		<!-- Custom styles for this template -->
 		<link th:href="@{/asserts/css/dashboard.css}" href="../../static/asserts/css/dashboard.css" rel="stylesheet">
+
 		<style type="text/css">
 			/* Chart.js */
 			
@@ -76,13 +77,17 @@
 									<td th:text="${#dates.format(emp.birth,'yyyy-MM-dd')}"></td>
                                     <td>
                                         <a class="btn btn-primary" th:href="@{/emp/}+${emp.id}">编辑</a>
-                                        <button class="btn btn-danger">删除</button>
+										<button th:attr="del_uri=@{/emp/}+${emp.id}" class="btn btn-danger deleteBtn">删除</button>
                                     </td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</main>
+
+				<form id="deleteEmpForm" method="post">
+					<input type="hidden" name="_method" value="delete">
+				</form>
 			</div>
 		</div>
 
@@ -91,45 +96,20 @@
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		<script type="text/javascript" th:href="@{/webjars/jquery/3.4.1/jquery.js}"></script>
-		<script type="text/javascript" th:href="@{/asserts/js/popper.min.js}"></script>
-		<script type="text/javascript" th:href="@{/webjars/bootstrap/4.4.1/js/bootstrap.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+		<script type="text/javascript" th:src="@{/asserts/js/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.js}"></script>
 
 		<!-- Icons -->
-		<script type="text/javascript" th:href="@{/asserts/js/feather.min.js}"></script>
+		<script type="text/javascript" th:src="@{/asserts/js/feather.min.js}"></script>
 		<script>
 			feather.replace()
 		</script>
 
-		<!-- Graphs -->
-		<script type="text/javascript" th:href="@{/webjars/chart.js/2.9.3/dist/Chart.js}"></script>
 		<script>
-			var ctx = document.getElementById("myChart");
-			var myChart = new Chart(ctx, {
-				type: 'line',
-				data: {
-					labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-					datasets: [{
-						data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-						lineTension: 0,
-						backgroundColor: 'transparent',
-						borderColor: '#007bff',
-						borderWidth: 4,
-						pointBackgroundColor: '#007bff'
-					}]
-				},
-				options: {
-					scales: {
-						yAxes: [{
-							ticks: {
-								beginAtZero: false
-							}
-						}]
-					},
-					legend: {
-						display: false,
-					}
-				}
+			$(".deleteBtn").click(function () {
+				$("#deleteEmpForm").attr("action",$(this).attr("del_uri")).submit();
+				return false;
 			});
 		</script>
 

@@ -54,7 +54,9 @@ public class MyConfig implements WebMvcConfigurer {
         interceptorRegistration.addPathPatterns("/**");
         interceptorRegistration.excludePathPatterns("/", "/index.html", "/login.html", "/user/login");
         // 不拦截静态资源
-        interceptorRegistration.excludePathPatterns("/asserts/**", "/webjars/**", "/static/**");
+        interceptorRegistration.excludePathPatterns("/asserts/**", "/webjars/**", "/static/**","/css/**","/js/**","/img/**");
+
+        // excludePathPatterns("/index.html","/","/user/login","/webjars/**","/css/**","/js/**","/img/**");
 
     }
 
